@@ -1,0 +1,68 @@
+
+<form class="example-container" [formGroup]="form" #frmExam="ngForm" (submit)="save()" #frmSign="ngForm">
+
+    <div [hidden]="true">
+        <mat-form-field>
+            <!--formControlName es obligatorio en los formularios ya que indica como enlazar el formulario con el html-->
+            <input matInput placeholder="ID" required formControlName="idSign">
+        </mat-form-field>
+    </div>
+<!---
+    <mat-form-field>
+        <mat-label>Patients</mat-label>
+        <mat-select formControlName="patients">
+
+          <mat-option *ngFor="let p of patients" [value]="p">{{p.firstName}} {{p.lastName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    -->
+
+    <mat-form-field>
+        <input matInput placeholder="Patient" formControlName="patient" [matAutocomplete]="autoPatient" [formControl]="patientControl">
+        <mat-autocomplete #autoPatient = "matAutocomplete" [displayWith]="showPatient">
+            <!--el patientsFiltered$ | async" permite guardar los pacientes filtrados y se usa async para poder leeer la lista que esta de modo observable -->
+            <mat-option *ngFor="let p of patientsFiltered$ | async" [value]="p"> 
+                {{p.firstName}} {{p.lastName}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <button mat-raised-button color = "primary" type="button"  style="float: right" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+
+        <span>Nuevo Paciente</span>
+
+    </button>
+
+<mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" required formControlName="signDate" [min]="minDate">
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Temperature" required formControlName="temperature">
+    
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Pulse" required formControlName="pulse">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Rhythm" required formControlName="rhythm">
+</mat-form-field>
+
+<!--por defecto todo boton desencadena un submit, para asociarlo solo a este se especifica que sea submit-->
+<button mat-raised-button color="primary" type="submit" [disabled]="frmSign.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Done</span>
+</button>
+
+<button mat-raised-button color ="accent" type="button" routerLink="/pages/signs">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancel</span>
+</button>
+
+</form>
