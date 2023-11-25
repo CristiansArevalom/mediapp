@@ -10,6 +10,9 @@ import { ServerErrorsInterceptor } from './interceptor/server-errors-interceptor
 import { environment } from 'src/environments/environment.development';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { RolesUserComponent } from './pages/roles-user/roles-user.component';
+import { RolesUserEditComponent } from './pages/roles-user/roles-user-edit/roles-user-edit.component';
+
 
 
 export function tokenGetter() {

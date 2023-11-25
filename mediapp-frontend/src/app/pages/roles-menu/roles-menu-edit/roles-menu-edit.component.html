@@ -1,0 +1,56 @@
+<p>roles-menu-edit works!</p>
+
+<form class = "example-container" [formGroup]="form" (submit)="save()">
+    <div class="test-container">
+    <section class="menu-role">
+        <mat-form-field>
+            <input matInput placeholder="MENU_SELECCIONADO" formControlName="menu" [matAutocomplete]="autoMenu" [formControl]="menuControl" > <!-- 2 Se asocia un formControl-->
+            <mat-autocomplete #autoMenu="matAutocomplete" [displayWith]="showMenu " > <!--  (optionSelected)="selectedMenu($event)" 1 ese apodo es para poder relacionar el autocomplete con el input y poder ve rla data en el input-->
+                <mat-option *ngFor="let menu of menuFiltered$ | async"[value]="menu"> <!-- 5  userFiltered$ es la variable del observable con el valor filtrado  se añade async para que fiuncione-->
+                    {{menu.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <h2>Roles Actuales</h2>
+        <!--Una vez seleccionado un usuario, este debe traer los roles asociados-->
+        <mat-list role="list">
+                <mat-list-item *ngFor="let rol of menuRoles">
+                        {{rol.name}}
+                </mat-list-item>
+        </mat-list>
+    </section>
+
+    <section class="assing-roles">
+        <mat-form-field>
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol">
+                <mat-option *ngFor="let rol of roles" [value]="rol">
+                    {{rol.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="addRol()">Add Rol</button>
+
+    <h2>Nuevos Roles</h2>
+    <div class="selected-rol">
+        
+        <mat-list role="list">
+
+            <mat-list-item role="listitem" *ngFor="let rol of rolesSelected; let i = index">
+                {{i + 1}} {{ rol.name }}
+                <button mat-raised-button color="primary" type="button" (click)="removeRol(rol)">Remove</button>
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+    </section>
+</div>
+
+    <button mat-raised-button color="primary" type="submit">Save</button>
+
+    <button mat-raised-button color ="accent" type="button" routerLink="/pages/menu-rol">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

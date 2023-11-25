@@ -1,0 +1,37 @@
+<form [formGroup]="form" class="example-container" (submit)="operate()" #frmPatient="ngForm">
+
+    <div [hidden]="true">
+        <mat-form-field>
+            <input matInput placeholder="ID" required formControlName="idMenu">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="name" required formControlName="name">
+        <small *ngIf="form.controls['name'].errors?.['required'] && form.controls['name'].touched" class="invalid">Is required</small>
+        <small *ngIf="form.controls['name'].errors?.['minlength'] && form.controls['name'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="icon" required formControlName="icon">
+        <small *ngIf="form.controls['icon'].errors?.['required'] && form.controls['icon'].touched" class="invalid">Is required</small>
+        <small *ngIf="form.controls['icon'].errors?.['minlength'] && form.controls['icon'].touched" class="invalid">Minlength is 3</small>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="url" required formControlName="url">
+        <small *ngIf="form.controls['url'].errors?.['required'] && form.controls['url'].touched" class="invalid">Is required</small>
+        <small *ngIf="form.controls['url'].errors?.['minlength'] && form.controls['url'].touched" class="invalid">Minlength is 8</small>
+    </mat-form-field>
+
+
+    <button mat-raised-button type="submit" color="primary" [disabled]="frmPatient.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+    <button mat-raised-button type="button" color="accent" routerLink="/pages/menu">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+
+</form>

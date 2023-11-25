@@ -53,9 +53,9 @@ export class SignEditComponent implements OnInit{
       patient:this.patientControl,
     });
 
-    //this.patientService.getPatientChange().subscribe(data => {
-    this.loadInitialData();
-     // });
+    this.patientService.getPatientChange().subscribe(data => {
+      this.loadInitialData();
+      });
     this.patientsFiltered$=this.patientControl.valueChanges.pipe(map(val => this.filterPatients(val)))
 
 
@@ -68,6 +68,7 @@ export class SignEditComponent implements OnInit{
 
   initForm(){
     if(this.isEdit){
+
       this.signService.findById(this.idSign).subscribe( data => {
         this.form=new FormGroup({
           idSign: new FormControl(data.idSign,[Validators.required]), //esta e sla maenra de enlazar la variable con el html
@@ -108,6 +109,7 @@ export class SignEditComponent implements OnInit{
       disableClose: true
     });
     console.log("open dialog")
+    //si el paciente se creo, debe actualizar el autocomplete
   }
 
   save(){
@@ -128,7 +130,7 @@ export class SignEditComponent implements OnInit{
         //update, esta forma puede generar callback hell se recomienda la de abajo
         this.signService.update(this.idSign,sign).subscribe(() =>{
           this.signService.findAll().subscribe(data => {
-            //envianto al otro componente con subjects
+            //envianto al otro componente con subjects (variables reactivas)
             this.signService.setSignChange(data);
             this.signService.setMessageChange('UPDATED!')
 

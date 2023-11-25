@@ -17,7 +17,13 @@ export class SignService extends GenericService<Sign>{
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/signs`);
   }
-   /*  
+   /* 
+      constructor(http: HttpClient) {
+    super(
+      http,
+      `${environment.HOST}/signs`);
+  }
+
   findAll(){
     return this.http.get<Sign[]>(this.url);
   }

@@ -1,0 +1,61 @@
+<form class="example-container" [formGroup]="form" (submit)="save()" #frmRoleUser="ngForm">
+    <div class = "test-container">
+    <section class="selected-user">
+            <mat-form-field>
+                <input matInput placeholder="EMAIL_SELECCIONADO" formControlName="user" [matAutocomplete]="autoUser"
+                    [formControl]="userControl"> <!-- 2 Se asocia un formControl-->
+                <mat-autocomplete #autoUser="matAutocomplete" [displayWith]="showUser ">
+                    <!--  (optionSelected)="selectedUser($event)" 1 ese apodo es para poder relacionar el autocomplete con el input y poder ve rla data en el input-->
+                    <mat-option *ngFor="let user of userFiltered$ | async" [value]="user">
+                        <!-- 5  userFiltered$ es la variable del observable con el valor filtrado  se añade async para que fiuncione-->
+                        {{user.username}}
+                    </mat-option>
+                </mat-autocomplete>
+                <small *ngIf="form.controls['user'].errors?.['minlength'] && form.controls['user'].touched" class="invalid">Minlength is 3</small>
+            </mat-form-field>
+
+        <div class ="selected-roles">
+            <h2>Roles Actuales</h2>
+            <!--Una vez seleccionado un usuario, este debe traer los roles asociados-->
+            <mat-list role="list">
+                <mat-list-item *ngFor="let rol of userRoles" >
+                    {{rol.name}}
+                </mat-list-item>
+            </mat-list>
+
+        </div>
+        </section>
+
+        <section class = "assign-roles">
+
+            <mat-form-field>
+                <mat-label>Rol</mat-label>
+                <mat-select formControlName="rol">
+                    <mat-option *ngFor="let rol of roles" [value]="rol">
+                        {{rol.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="button" (click)="addRol()">Add Rol</button>
+
+            <div class = "new-roles">
+            <h2>Nuevos Roles</h2>
+
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let rol of rolesSelected; let i = index">
+                        {{i + 1}} {{ rol.name }}
+                        <button mat-raised-button color="primary" type="button" (click)="removeRol(rol)">Remove</button>
+                    </mat-list-item>
+                </mat-list>
+                </div>
+            </section>
+        </div>
+    <div class="buttons-form">
+        <button mat-raised-button color="accent" type="button" routerLink="/pages/user-rol">
+            <mat-icon>cancel</mat-icon>
+            <span>Cancel</span>
+        </button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmRoleUser.invalid">Save</button>
+
+    </div>
+</form>

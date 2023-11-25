@@ -32,7 +32,8 @@ public class Menu {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "menu_role",
             joinColumns = @JoinColumn(name = "id_menu", referencedColumnName = "idMenu"),
-            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "idRole")
+            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "idRole"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"id_menu","id_role"})
     )
     private List<Role> roles;
 

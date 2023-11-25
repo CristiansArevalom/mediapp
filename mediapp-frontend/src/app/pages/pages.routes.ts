@@ -18,6 +18,12 @@ import { SignsComponent } from './signs/signs.component';
 import { SignEditComponent } from './signs/sign-edit/sign-edit.component';
 import { RolComponent } from './rol/rol.component';
 import { RolEditComponent } from './rol/rol-edit/rol-edit.component';
+import { MenuComponent } from './menu/menu.component';
+import { MenuEditComponent } from './menu/menu-edit/menu-edit.component';
+import { RolesMenuComponent } from './roles-menu/roles-menu.component';
+import { RolesMenuEditComponent } from './roles-menu/roles-menu-edit/roles-menu-edit.component';
+import { RolesUserComponent } from './roles-user/roles-user.component';
+import { RolesUserEditComponent } from './roles-user/roles-user-edit/roles-user-edit.component';
 
 export const PagesRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [CertGuard] },
@@ -84,11 +90,43 @@ export const PagesRoutes: Routes = [
         component:RolEditComponent
       },
       {
-        path:'edit/id:',
+        path:'edit/:id',
         component:RolEditComponent,
       }
     ], canActivate: [CertGuard]
 
+  },
+  {
+    path: 'menu',
+    component:MenuComponent, children:[
+      {
+        path:'new',
+        component:MenuEditComponent
+      },
+      {
+        path:'edit/:id',
+        component:MenuEditComponent
+      }
+    ],canActivate: [CertGuard]
+    
+  },
+  {
+    path: 'menu-rol',
+    component:RolesMenuComponent, children:[
+      {
+        path:'edit/:id',
+        component: RolesMenuEditComponent
+      }
+    ], canActivate:[CertGuard]
+  },
+  {
+    path: 'user-rol',
+    component:RolesUserComponent,children:[
+      {
+        path:'edit/:id',
+        component:RolesUserEditComponent
+      },
+    ],canActivate:[CertGuard]
   },
 
   { path: 'medic', component: MedicComponent, canActivate: [CertGuard] },
@@ -97,6 +135,6 @@ export const PagesRoutes: Routes = [
   { path: 'search', component: SearchComponent, canActivate: [CertGuard] },
   { path: 'report', component: ReportComponent, canActivate: [CertGuard] },
   { path: 'not-403', component: Not403Component },
-  { path: 'profile', component: ProfileComponent, canActivate: [CertGuard] },
+  { path: 'profiles', component: ProfileComponent, canActivate: [CertGuard] },
 ];
 

@@ -1,5 +1,5 @@
 
-<form class="example-container" [formGroup]="form" #frmExam="ngForm" (submit)="save()" #frmSign="ngForm">
+<form class="example-container" [formGroup]="form" (submit)="save()" #frmSign="ngForm"> <!--e l #frmSign se uso  se utiliza para crear una referencia local al formulario y asi en el button validar si es valido o no -->
 
     <div [hidden]="true">
         <mat-form-field>

@@ -2,6 +2,7 @@ package com.mitocode.controller;
 
 
 import com.mitocode.dto.MenuDTO;
+import com.mitocode.dto.PatientDTO;
 import com.mitocode.dto.RolDTO;
 import com.mitocode.model.Menu;
 import com.mitocode.model.Role;
@@ -11,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -76,7 +79,11 @@ public class MenuController {
         return new ResponseEntity<>(convertEntityToDto(obj),HttpStatus.OK);
     }
 
-
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<MenuDTO>> listPage(Pageable pageable){
+        Page<MenuDTO> page = service.listPage(pageable).map(p -> modelMapper.map(p, MenuDTO.class));
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
 
     private Menu convertDtoToEntity(MenuDTO dto){
         return modelMapper.map(dto, Menu.class);

@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,6 +49,13 @@ public class UserController {
         User obj = service.findById(id);
         return new ResponseEntity<>(convertEntityToDto(obj), HttpStatus.OK);
     }    
+
+    @GetMapping("/pageable")
+    public ResponseEntity<Page<UserDTO>> listPage(Pageable pageable){
+        Page<UserDTO> page = service.listPage(pageable).map(p -> mapper.map(p, UserDTO.class));
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO dto){
         User obj = service.save(convertDtoToEntity(dto));

@@ -4,6 +4,9 @@ import com.mitocode.repo.IGenericRepo;
 import com.mitocode.repo.IMenuRepo;
 import com.mitocode.service.IMenuService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -36,4 +39,10 @@ public class MenuServiceImpl extends CRUDImpl<Menu, Integer> implements IMenuSer
         Menu menuUpdated = this.update(menuTemp, id);
         return menuUpdated;
     }
+
+    @Override
+    public Page<Menu> listPage(Pageable pageable) {
+        return repo.findAll(pageable);
+    }
+
 }
