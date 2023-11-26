@@ -52,7 +52,7 @@ export class RolEditComponent implements OnInit{
           //llenando el formulario con los datos que trae del service.
           this.form = new FormGroup({
             idRole: new FormControl(data.idRole),
-          name: new FormControl('',[Validators.required, Validators.minLength(3)]),
+             name: new FormControl(data.name,[Validators.required, Validators.minLength(3)]),
             description: new FormControl(data.description,[Validators.required,Validators.minLength(3)])
 
           });

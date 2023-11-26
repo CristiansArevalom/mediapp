@@ -43,7 +43,7 @@ export class RolComponent implements OnInit {
     })
 
     this.rolService.getMessageChange().subscribe(data =>{
-      this._snackBar.open(data,'INFO',{duration:20000});
+      this._snackBar.open(data,'INFO',{duration:2000});
     });
 
     this.rolService.findAll().subscribe((data) => {
