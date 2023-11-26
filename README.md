@@ -56,18 +56,17 @@ git https://github.com/CristiansArevalom/mediapp.git
 # New Features
 -CRUD for vital signs with modal allowing create patients
 ![Relational Data Model](/assets/vitalSignsCreate.gif)
+update sign
 ![signsUpdate](/assets/vitalSignsUpdate.gif)
 
-- Rol
+Rol
 ![Rol](/assets/rol.gif)
-- Menu
+Menu
 ![Menu](/assets/menu.gif)
-- Assign roles to menu
+Assign roles to menu
   ![Menu-rol](/assets/menu-rol.gif)
-- Assign roles to users
+Assign roles to users
  ![User-Rol](/assets/user-rol.gif)
-- view profile details
-- 
 
 # Authors
 - [@CristiansArevalom](https://github.com/CristiansArevalom)
